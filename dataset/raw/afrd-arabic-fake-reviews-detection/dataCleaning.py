@@ -2,15 +2,12 @@ import os
 import pandas as pd
 
 # Read the Excel file
-df = pd.read_excel('./Balanced_Data.xlsx')
+df = pd.read_excel('./multi-domain.xlsx')
 
 df.columns = df.columns.str.lower()
-df.drop(columns=['age', 'gender', 'name'], inplace=True)
-df.replace({'class': {'Fake': 'deceptive'}}, inplace=True)
+df.replace({'class': {0: 'truthful', 1: 'deceptive'}}, inplace=True)
 
 # Convert all values in the 'polarity' column to lowercase
-df['class'] = df['class'].str.lower()
-
 df['polarity'] = df['polarity'].str.lower()
 
 # Split the DataFrame into four based on the 'class' and 'polarity' column values
