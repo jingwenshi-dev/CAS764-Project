@@ -2,7 +2,8 @@ import json
 import os
 
 from openai import OpenAI
-from pydantic import BaseModel
+from pandas.core.interchange.from_dataframe import primitive_column_to_ndarray
+from pydantic import BaseModel, Field
 
 from experiment.extract_data import extract_data
 from experiment.generate_msg import generate_messages
@@ -10,38 +11,48 @@ from experiment.generate_msg import generate_messages
 client = OpenAI()
 api_key = os.getenv('OPENAI_API_KEY')
 
+
+class PredictionItem(BaseModel):
+    index: int
+    prediction: str
+
 class Result(BaseModel):
-    prediction: list[str]
+    results: list[PredictionItem]
 
 folder = '../dataset/clean/deceptive-opinion-spam-corpus/'
 datasets = ['deceptive_negative.csv', 'deceptive_positive.csv', 'truthful_negative.csv', 'truthful_positive.csv']
 
-def api_call(folder: str, datasets: list, remove_cols: list, sample_num: int, sample_random_state: int, test_num: int, test_random_state):
+def api_call(folder: str, datasets: list, remove_cols: list, sample_num: int, sample_random_state: int, test_num: int, test_random_state, i):
 
     sample_set, test_set = extract_data(folder, datasets, remove_cols, sample_num, sample_random_state, test_num,
                                         test_random_state)
 
     messages = generate_messages(sample_set, test_set, datasets)
 
+    # print(messages)
+    # print(test_set)
+
     completion = client.beta.chat.completions.parse(
         model="gpt-4o-2024-08-06",
         messages=messages,
         response_format=Result,
-        temperature=0,
+        temperature=0.2
     )
 
-    result = json.loads(completion.choices[0].message.content)['prediction']
+    result = json.loads(completion.choices[0].message.content)['results']
+    print(result)
 
     for dataset in test_set:
-        test_set[dataset]['prediction'] = result[:len(test_set[dataset])]
-        result = result[len(test_set[dataset]):]
-        test_set[dataset].to_csv('./results/' + dataset.replace('.csv', '_prediction.csv'), index=False)
+        for item in result:
+            if item['index'] in test_set[dataset].index:
+                test_set[dataset].loc[item['index'], 'prediction'] = item['prediction']
+        output_path = f'./results/baseline/{i}/'
+        os.makedirs(output_path, exist_ok=True)
+        test_set[dataset].to_csv(os.path.join(output_path, dataset.replace('.csv', f'_prediction_{sample_num}.csv')),
+                                 index=False)
 
-
-# api_call(folder, datasets, [], 0, 42, 50, 42)
-# api_call(folder, datasets, [], 5, 42, 50, 42)
-# api_call(folder, datasets, [], 10, 42, 50, 42)
-# api_call(folder, datasets, [], 15, 42, 50, 42)
-# api_call(folder, datasets, [], 20, 42, 50, 42)
-
-api_call(folder, datasets, [], 0, 42, 1, 42)
+for i in range(1):
+    # api_call(folder, datasets, [], 0, 1, 10, 2, i)
+    # api_call(folder, datasets, [], 5, 3, 10, 4, i)
+    # api_call(folder, datasets, [], 10, 5, 10, 6, i)
+    api_call(folder, datasets, [], 1, 5, 1, 6, i)

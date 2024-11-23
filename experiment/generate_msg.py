@@ -21,19 +21,21 @@ def generate_messages(sample_set, test_set, datasets):
                 "content": row['text']
             })
 
+    total_inputs = sum(len(test_set[dataset]) for dataset in test_set)
     messages.append({
         "role": "system",
         "content": (
-            "Now classify each of the following reviews as either 'truthful' or 'deceptive'. "
-            "Return your response as a JSON list of classifications, e.g., ['truthful', 'deceptive', ...]."
+            f"Now classify each of the following {total_inputs} reviews as either 'truthful' or 'deceptive'. "
+            "Return your response as a JSON list of classifications paired with index, e.g. [{'0': 'truthful'}, {'1': 'deceptive'}, ...]. "
+            f"The results should not contain more than {total_inputs} items."
         )
     })
 
     for dataset in test_set:
-        for index, row in test_set[dataset].iterrows():
+        for _, row in test_set[dataset].iterrows():
             messages.append({
                 "role": "user",
-                "content": row['text']
+                "content": f"{row['index']}: {row['text']}"
             })
 
     return messages

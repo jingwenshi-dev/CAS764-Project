@@ -1,43 +1,32 @@
 import csv
 import os
+import pandas as pd
 
 # Define the input and output file paths
 input_file = './deceptive-opinion.csv'
 output_dir = '../../clean/deceptive-opinion-spam-corpus'
-output_files = {
-    'deceptive_positive.csv': [],
-    'deceptive_negative.csv': [],
-    'truthful_positive.csv': [],
-    'truthful_negative.csv': []
-}
 
-# Create the output directory if it doesn't exist
+df = pd.read_csv(input_file)
+df.rename(columns={'deceptive': 'class'}, inplace=True)
+
+# Reset index to keep the original index as a column
+df.reset_index(inplace=True, drop=False)
+
+# Split the DataFrame into four based on the 'class' column values
+deceptive_negative_df = df[(df['class'] == 'deceptive') & (df['polarity'] == 'negative')]
+deceptive_positive_df = df[(df['class'] == 'deceptive') & (df['polarity'] == 'positive')]
+truthful_negative_df = df[(df['class'] == 'truthful') & (df['polarity'] == 'negative')]
+truthful_positive_df = df[(df['class'] == 'truthful') & (df['polarity'] == 'positive')]
+
 os.makedirs(output_dir, exist_ok=True)
 
-# Read the input CSV file
-with open(input_file, 'r', encoding='utf-8') as csvfile:
-    reader = csv.reader(csvfile)
-    header = next(reader)  # Read the header row
-    header.remove('source')  # Remove the 'source' column from the header
+# Save each DataFrame into separate CSV files
+deceptive_negative_file_path = f'{output_dir}/deceptive_negative.csv'
+deceptive_positive_file_path = f'{output_dir}/deceptive_positive.csv'
+truthful_negative_file_path = f'{output_dir}/truthful_negative.csv'
+truthful_positive_file_path = f'{output_dir}/truthful_positive.csv'
 
-    # Process each row in the CSV file
-    for row in reader:
-        label, hotel, polarity, source, review = row
-        row_without_source = [label, hotel, polarity, review]  # Exclude the 'source' column
-        if label == 'deceptive':
-            if polarity == 'positive':
-                output_files['deceptive_positive.csv'].append(row_without_source)
-            elif polarity == 'negative':
-                output_files['deceptive_negative.csv'].append(row_without_source)
-        elif label == 'truthful':
-            if polarity == 'positive':
-                output_files['truthful_positive.csv'].append(row_without_source)
-            elif polarity == 'negative':
-                output_files['truthful_negative.csv'].append(row_without_source)
-
-# Write the output files
-for output_file, rows in output_files.items():
-    with open(os.path.join(output_dir, output_file), 'w', encoding='utf-8', newline='') as csvfile:
-        writer = csv.writer(csvfile)
-        writer.writerow(header)  # Write the header row
-        writer.writerows(rows)  # Write the data rows
+deceptive_negative_df.to_csv(deceptive_negative_file_path, index=False)
+deceptive_positive_df.to_csv(deceptive_positive_file_path, index=False)
+truthful_negative_df.to_csv(truthful_negative_file_path, index=False)
+truthful_positive_df.to_csv(truthful_positive_file_path, index=False)
