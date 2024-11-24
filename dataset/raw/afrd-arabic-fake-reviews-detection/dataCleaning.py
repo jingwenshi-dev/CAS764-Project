@@ -10,6 +10,9 @@ df.replace({'class': {0: 'truthful', 1: 'deceptive'}}, inplace=True)
 # Convert all values in the 'polarity' column to lowercase
 df['polarity'] = df['polarity'].str.lower()
 
+# Reset index to keep the original index as a column
+df.reset_index(inplace=True, drop=False)
+
 # Split the DataFrame into four based on the 'class' and 'polarity' column values
 deceptive_negative_df = df[(df['class'] == 'deceptive') & (df['polarity'] == 'negative')]
 deceptive_positive_df = df[(df['class'] == 'deceptive') & (df['polarity'] == 'positive')]

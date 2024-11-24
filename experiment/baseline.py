@@ -29,30 +29,35 @@ def api_call(folder: str, datasets: list, remove_cols: list, sample_num: int, sa
 
     messages = generate_messages(sample_set, test_set, datasets)
 
-    # print(messages)
-    # print(test_set)
-
     completion = client.beta.chat.completions.parse(
-        model="gpt-4o-2024-08-06",
+        model="gpt-4o",
         messages=messages,
         response_format=Result,
-        temperature=0.2
     )
 
     result = json.loads(completion.choices[0].message.content)['results']
     print(result)
 
+    # for dataset in test_set:
+    #     for item in result:
+    #         if item['index'] in test_set[dataset].index:
+    #             test_set[dataset].loc[item['index'], 'prediction'] = item['prediction']
+    #     output_path = f'./results/baseline/{i}/'
+    #     os.makedirs(output_path, exist_ok=True)
+    #     test_set[dataset].to_csv(os.path.join(output_path, dataset.replace('.csv', f'_prediction_{sample_num}.csv')),
+    #                              index=False)
+
+    predictions = [item['prediction'] for item in result]
     for dataset in test_set:
-        for item in result:
-            if item['index'] in test_set[dataset].index:
-                test_set[dataset].loc[item['index'], 'prediction'] = item['prediction']
+        test_set[dataset]['prediction'] = predictions[:len(test_set[dataset])]
+        predictions = predictions[len(test_set[dataset]):]
+
         output_path = f'./results/baseline/{i}/'
         os.makedirs(output_path, exist_ok=True)
         test_set[dataset].to_csv(os.path.join(output_path, dataset.replace('.csv', f'_prediction_{sample_num}.csv')),
                                  index=False)
 
 for i in range(1):
-    # api_call(folder, datasets, [], 0, 1, 10, 2, i)
-    # api_call(folder, datasets, [], 5, 3, 10, 4, i)
-    # api_call(folder, datasets, [], 10, 5, 10, 6, i)
-    api_call(folder, datasets, [], 1, 5, 1, 6, i)
+    api_call(folder, datasets, [], 0, 1, 10, 2, i)
+    api_call(folder, datasets, [], 5, 3, 10, 4, i)
+    api_call(folder, datasets, [], 10, 5, 10, 6, i)

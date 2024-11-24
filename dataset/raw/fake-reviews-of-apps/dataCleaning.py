@@ -11,6 +11,9 @@ df.rename(columns={'review': 'text'}, inplace=True)
 # Replace values in the 'deceptive' column
 df.replace({'class': {'genuine': 'truthful', 'fake': 'deceptive'}}, inplace=True)
 
+# Reset index to keep the original index as a column
+df.reset_index(inplace=True, drop=False)
+
 # Split the DataFrame into two based on the 'deceptive' column values
 truthful_df = df[df['class'] == 'truthful']
 deceptive_df = df[df['class'] == 'deceptive']
