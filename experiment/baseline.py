@@ -30,9 +30,10 @@ def api_call(folder: str, datasets: list, remove_cols: list, sample_num: int, sa
     messages = generate_messages(sample_set, test_set, datasets)
 
     completion = client.beta.chat.completions.parse(
-        model="gpt-4o",
+        model="gpt-4o-2024-08-06",
         messages=messages,
         response_format=Result,
+        temperature=0.7
     )
 
     result = json.loads(completion.choices[0].message.content)['results']
@@ -46,6 +47,8 @@ def api_call(folder: str, datasets: list, remove_cols: list, sample_num: int, sa
     #     os.makedirs(output_path, exist_ok=True)
     #     test_set[dataset].to_csv(os.path.join(output_path, dataset.replace('.csv', f'_prediction_{sample_num}.csv')),
     #                              index=False)
+
+    exit(0)
 
     predictions = [item['prediction'] for item in result]
     for dataset in test_set:

@@ -1,6 +1,6 @@
 import pandas as pd
 
-path = './results/app-language-reverse/0/'
+path = './results/baseline/0/'
 
 for i in range(3):
     # if i == 0:
@@ -13,12 +13,26 @@ for i in range(3):
     #     files = ['deceptive_negative_prediction_10.csv', 'deceptive_positive_prediction_10.csv',
     #              'truthful_negative_prediction_10.csv', 'truthful_positive_prediction_10.csv']
 
+    # if i == 0:
+    #     files = ['deceptive_positive_prediction_0.csv', 'truthful_positive_prediction_0.csv']
+    # elif i == 1:
+    #     files = ['deceptive_positive_prediction_5.csv', 'truthful_positive_prediction_5.csv']
+    # else:
+    #     files = ['deceptive_positive_prediction_10.csv', 'truthful_positive_prediction_10.csv']
+
     if i == 0:
-        files = ['deceptive_prediction_0.csv', 'truthful_prediction_0.csv']
+        files = ['deceptive_negative_prediction_0.csv', 'truthful_negative_prediction_0.csv']
     elif i == 1:
-        files = ['deceptive_prediction_5.csv', 'truthful_prediction_5.csv']
+        files = ['deceptive_negative_prediction_5.csv', 'truthful_negative_prediction_5.csv']
     else:
-        files = ['deceptive_prediction_10.csv', 'truthful_prediction_10.csv']
+        files = ['deceptive_negative_prediction_10.csv', 'truthful_negative_prediction_10.csv']
+
+    # if i == 0:
+    #     files = ['deceptive_prediction_0.csv', 'truthful_prediction_0.csv']
+    # elif i == 1:
+    #     files = ['deceptive_prediction_5.csv', 'truthful_prediction_5.csv']
+    # else:
+    #     files = ['deceptive_prediction_10.csv', 'truthful_prediction_10.csv']
 
     dfs = []
     for file in files:

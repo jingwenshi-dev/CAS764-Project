@@ -57,6 +57,6 @@ def api_call(folder: str, datasets: list, remove_cols: list, sample_num: int, sa
                                  index=False)
 
 for i in range(1):
-    api_call(folder, datasets, [], 0, 1, 20, 2, i)
-    api_call(folder, datasets, [], 5, 3, 20, 4, i)
+    # api_call(folder, datasets, [], 0, 1, 20, 2, i)
+    # api_call(folder, datasets, [], 5, 3, 20, 4, i)
     api_call(folder, datasets, [], 10, 5, 20, 6, i)
