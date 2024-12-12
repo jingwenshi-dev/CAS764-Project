@@ -432,23 +432,9 @@ Tables are provided to complement the graphs, as the stacked numbers in the grap
   \caption{English to Arabic Results}
 \end{figure}
 
-\begin{table}[h!]
-  \centering
-  \caption{Eng-Arb Metrics by Shot Count}
-  \begin{tabular}{c c c c}
-    \toprule
-    Shot Count & Accuracy (\%) & Precision (\%) & Recall (\%) \\
-    \midrule
-    Zero Shot  & 52.00         & 22.80          & 16.00       \\
-    20 Shots   & 55.00         & 50.20          & 39.00       \\
-    40 Shots   & 56.80         & 59.00          & 47.00       \\
-    \bottomrule
-  \end{tabular}
-\end{table}
-
 For English to Arabic test (see Figure 4 \& Table 4), while the accuracy remains consistent at approximately 55\% regardless of the number of in-context examples, precision and recall show some improvement. This indicates that the model becomes better at correctly identifying fake reviews and minimizing false positives while improving its ability to identify all actual deceptive reviews.
 
-However, for Arabic to English test (see Figure 5 \& Table 5), there is nearly no change in all three metrics across different numbers of in-context examples. This suggests that the LLMs are unable to effectively learn knowledge from Arabic and apply it to English.
+However, for Arabic to English test (see Figure 5 \& Table 4), there is nearly no change in all three metrics across different numbers of in-context examples. This suggests that the LLMs are unable to effectively learn knowledge from Arabic and apply it to English.
 
 \begin{figure}[h]
   \centering
@@ -458,14 +444,22 @@ However, for Arabic to English test (see Figure 5 \& Table 5), there is nearly n
 
 \begin{table}[h!]
   \centering
-  \caption{Arb-Eng Metrics by Shot Count}
+  \caption{Eng-Arb and Arb-Eng Metrics by Shot Count}
   \begin{tabular}{c c c c}
     \toprule
-    Shot Count & Accuracy (\%) & Precision (\%) & Recall (\%) \\
+    \textbf{Metric} & \textbf{Zero Shot (\%)} & \textbf{20 Shots (\%)} & \textbf{40 Shots (\%)} \\
     \midrule
-    Zero Shot  & 51.80         & 51.80          & 52.00       \\
-    20 Shots   & 50.00         & 50.00          & 50.00       \\
-    40 Shots   & 52.20         & 51.80          & 54.00       \\
+    \multicolumn{4}{c}{\textbf{Eng-Arb}}                                                        \\
+    \midrule
+    Accuracy        & 52.00                   & 55.00                  & 56.80                  \\
+    Precision       & 22.80                   & 50.20                  & 59.00                  \\
+    Recall          & 16.00                   & 39.00                  & 47.00                  \\
+    \midrule
+    \multicolumn{4}{c}{\textbf{Arb-Eng}}                                                        \\
+    \midrule
+    Accuracy        & 51.80                   & 50.00                  & 52.20                  \\
+    Precision       & 51.80                   & 50.00                  & 51.80                  \\
+    Recall          & 52.00                   & 50.00                  & 54.00                  \\
     \bottomrule
   \end{tabular}
 \end{table}
@@ -484,7 +478,7 @@ If the baseline experiment is rerun using the App Review Dataset, the results su
 
 \subsection{Multilingual Test with App Review Dataset}
 
-For the English-to-Arabic test (see Figure 7), the trends for all three metrics across the number of shots are the same with those observed in the multilingual test using the Baseline Dataset.
+For the English-to-Arabic test (see Figure 7 \& Table 5), the trends for all three metrics across the number of shots are the same with those observed in the multilingual test using the Baseline Dataset.
 
 \begin{figure}[h]
   \centering
@@ -492,13 +486,35 @@ For the English-to-Arabic test (see Figure 7), the trends for all three metrics 
   \caption{English to Arabic Results with App Review Dataset}
 \end{figure}
 
-However, for the Arabic-to-English test (see Figure 8), precision maintains at a level comparable to the App Review baseline, while accuracy and recall improve as more in-context examples are provided, reaching approximately 94\%.
+However, for the Arabic-to-English test (see Figure 8 \& Table 5), precision maintains at a level comparable to the App Review baseline, while accuracy and recall improve as more in-context examples are provided, reaching approximately 94\%.
 
 \begin{figure}[h]
   \centering
   \includegraphics[width=\linewidth]{diagrams/arb_eng_metrics_app.png}
   \caption{Arabic to English Results with App Review Dataset}
 \end{figure}
+
+\begin{table}[h!]
+  \centering
+  \caption{Eng-Arb and Arb-Eng Metrics by Shot Count (w\ App Review Dataset)}
+  \begin{tabular}{c c c c}
+    \toprule
+    \textbf{Metric} & \textbf{Zero Shot (\%)} & \textbf{20 Shots (\%)} & \textbf{40 Shots (\%)} \\
+    \midrule
+    \multicolumn{4}{c}{\textbf{Eng-Arb}}                                                        \\
+    \midrule
+    Accuracy        & 51.00                   & 55.40                  & 57.20                  \\
+    Precision       & 21.20                   & 56.60                  & 59.00                  \\
+    Recall          & 20.00                   & 50.00                  & 48.40                  \\
+    \midrule
+    \multicolumn{4}{c}{\textbf{Arb-Eng}}                                                        \\
+    \midrule
+    Accuracy        & 62.20                   & 70.80                  & 94.00                  \\
+    Precision       & 96.60                   & 88.00                  & 94.60                  \\
+    Recall          & 26.00                   & 49.00                  & 94.00                  \\
+    \bottomrule
+  \end{tabular}
+\end{table}
 
 This shows that the LLM is indeed capable of learning from Arabic examples and contradicts the previous speculation that LLMs are unable to transfer knowledge from Arabic and applies to English.
 
