@@ -3,9 +3,9 @@ import matplotlib.pyplot as plt
 
 # Data
 metrics = ['Accuracy', 'Precision', 'Recall']
-zero_shot = [51.60, 51.60, 53.75]
-twenty_shots = [53.60, 52.60, 57.00]
-forty_shots = [64.80, 68.25, 57.00]
+zero_shot = [61.80, 96.60, 25.00]
+twenty_shots = [95.60, 95.00, 96.00]
+forty_shots = [97.00, 95.00, 100.00]
 
 # Plot
 x = np.arange(len(metrics))  # the label locations
@@ -18,7 +18,7 @@ bars3 = ax.bar(x + width, forty_shots, width, label='40 Shots', color='#2d5468')
 
 # Add labels, title, and custom x-axis tick labels
 ax.set_ylabel('Percentage (%)', fontsize=14)
-ax.set_title('Baseline Performance Metrics by Shot Count', fontsize=16)
+ax.set_title('Baseline Performance Metrics by Shot Count (App Review Dataset)', fontsize=16)
 ax.set_xticks(x)
 ax.set_xticklabels(metrics, fontsize=12)
 ax.legend(fontsize=12)
@@ -42,5 +42,5 @@ for bars in [bars1, bars2, bars3]:
 
 # Tight layout and display the plot
 plt.tight_layout()
-plt.savefig('../Paper/diagrams/baseline.png')
+plt.savefig('../Paper/diagrams/baseline_app.png')
 plt.show()
