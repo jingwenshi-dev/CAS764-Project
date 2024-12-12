@@ -112,7 +112,7 @@
 \renewcommand{\shortauthors}{Jingwen Shi}
 
 \begin{abstract}
-  Detecting deceptive reviews has become a critical challenge as fake reviews continue to increase, influencing consumer trust and purchasing decisions. This study evaluates the effectiveness of large language models (LLMs) in identifying deceptive reviews. Three datasets are used with few-shot testing to assess the performance of LLMs in learning from examples across different domains and languages. In general, LLMs demonstrate the ability to adapt knowledge from in-context examples to some extent, but their performance depends on the language of the training set and the complexity of the test's sentiment patterns. The findings highlight the potential of LLMs in automated fake review detection, reducing the reliance on training machine learning models from scratch.
+Detecting deceptive reviews has become a critical challenge as fake reviews continue to increase, influencing consumer trust and purchasing decisions. This study evaluates the effectiveness of large language models (LLMs) in identifying deceptive reviews. Three datasets are used with few-shot testing to assess the performance of LLMs in learning from examples across different domains and languages. In general, LLMs demonstrate the ability to adapt knowledge from in-context examples to some extent, but their performance depends on the language of the training set and the complexity of the test cases' sentiment patterns. The findings highlight the potential of LLMs in automated fake review detection, reducing the reliance on training machine learning models from scratch.
 \end{abstract}
 
 \maketitle
@@ -121,17 +121,17 @@
 Deceptive reviews are a form of opinion spamming. These reviews are intentionally misleading and aim to influence a product's rating, either positively or negatively, by posting false opinions to promote or discredit target products, services, or individuals.
 
 \subsection{Importance of Deceptive Review Detection}
-The concern regarding such activities has steadily grown due to the development of automated bots, commonly referred to as spambots, specifically designed for this purpose. As a result, a significant percentage of reviews on the internet are fake, which can mislead consumers and impact their purchasing decisions.
+The concern regarding such activities has steadily grown due to the development of automated bots, also known as spambots, is designed for such purpose. As a result, a significant percentage of reviews on the internet are fake, which can mislead consumers and impact people's purchasing decisions.
 
-Those deceptive reviews could rise to the top of review platforms, drowning out genuine reviews. Businesses that benefit from fake reviews may gain an unfair market advantage, which can lead to a reduction in the availability of high-quality products in the market. This phenomenon is also referred to as Gresham's Law, where "bad money drives out good."
+Those deceptive reviews could rise to the top of review platforms, drowning out the truthful ones. Businesses that benefit from fake reviews may gain an unfair market advantage, which can lead to a decrease in the availability of high-quality products on the market. This phenomenon is also referred to as Gresham's Law, where "bad money drives out good."
 
 \subsection{Challenges}
 Deceptive reviews often look similar to the truthful ones. Manually verifying them is not only tedious and time-consuming but also challenging, as deception can occur in many ways, including exaggeration, downplaying flaws, or providing misleading information.
 
-Traditional methods for detecting such reviews often involve sentiment analysis using feature-based approaches or natural language processing (NLP). However, training these models can be costly and time-consuming. Also, there is currently no well-labeled dataset of deceptive reviews with broad population coverage. Therefore, it will be a technical challenge to train a machine-learning model.
+Traditional methods for detecting such reviews often involve sentiment analysis using feature-based approaches or natural language processing. However, training these models can be expensive and time-consuming. Also, currently, there is no well-labeled dataset of deceptive reviews with broad population and domain coverage. Therefore, it will be a technical challenge to train a machine-learning model from the beginning.
 
 \subsection{Objective}
-The objective of this study is to explore the feasibility of using Large Language Models (LLMs) to detect deceptive reviews. This approach is based on the assumption that LLMs are pre-trained on extensive corpora, including deceptive reviews. Therefore, LLMs should have the capability to understand the context of the study and identify deceptive reviews to some extent.
+The objective of our study is to explore the feasibility of using Large Language Models (LLMs) to detect deceptive reviews. This approach is based on the assumption that LLMs are pre-trained on extensive corpora, which has already included deceptive reviews. Therefore, LLMs should have the capability to understand the context of the study and identify deceptive reviews to some extent.
 
 Note that, in this study, deceptive reviews are defined as those that are human-written and intentionally misleading. This definition excludes reviews generated by LLMs or other automated systems.
 
@@ -152,9 +152,9 @@ The remainder of this paper is organized as follows: Section 2 reviews related w
 \section{Past Work}
 The number of studies directly addressing the detection of human-written deceptive reviews is limited. However, there has been significant research on fake news detection and the detection of LLM-generated text.
 
-One of the most widely used methods for detecting fake news, deceptive reviews, and similar tasks involves training or fine-tuning various machine learning models on large corpora of text data. While the specific models and datasets may vary, the general approach is to train a model to learn the patterns of deceptive reviews and then apply it to detect such reviews. For instance, some studies use transformer-based models such as BERT, while others use classifiers or alternative architectures. Additionally, some studies focus on plain text data, while others have more diverse data structures, such as graphs \cite{liyanage-etal-2024-detecting, ott-etal-2011-finding, SALMINEN2022102771, ignat2024maideupmultilingualdeceptiondetection, 8259828}.
+One of the most widely used methods for detecting fake news, deceptive reviews, and similar tasks is to train or fine-tune machine learning models on large corpora of text data. While the specific models and datasets may vary, the general approach is to train a model to learn the patterns of deceptive reviews and find out the best one. For instance, some studies use transformer-based models such as BERT, while others use classifiers or alternative architectures. Additionally, some studies focus on plain text data, while others have more diverse data structures, such as graphs \cite{liyanage-etal-2024-detecting, ott-etal-2011-finding, SALMINEN2022102771, ignat2024maideupmultilingualdeceptiondetection, 8259828}.
 
-Another approach is analyzing linguistic features by conducting analyses to compare fake reviews with genuine ones. These studies focus on syntactic and lexical elements which rely on textual features to distinguish deceptive content \cite{ignat2024maideupmultilingualdeceptiondetection, 8259828, abri2020fakereviewsdetectionanalysis}.
+Another approach is analyzing linguistic features by comparing fake reviews with truthful ones. These studies focus on syntactic and lexical elements which rely on textual features to distinguish deceptive content \cite{ignat2024maideupmultilingualdeceptiondetection, 8259828, abri2020fakereviewsdetectionanalysis}.
 
 Furthermore, some studies propose innovative methods to detect fake reviews. For example, one study developed an Adaptive Rationale Guidance Network, which integrates insights from LLM-generated rationales into small language models (SLMs) to enhance fake news detection performance \cite{Hu_2024}.
 
@@ -171,7 +171,7 @@ Three datasets from Kaggle are used in this study to evaluate the performance of
   \item[3.] \href{https://www.kaggle.com/datasets/umairanjacks/fake-reviews-of-apps}{Fake Reviews of apps}
 \end{itemize}
 
-The Deceptive Opinion Spam Corpus Dataset (hereafter referred to as the Baseline or Hotel Review Dataset) is used as the baseline dataset. This dataset is well-balanced, consisting of a total of 1,600 rows evenly distributed across four categories (see Table 1). Each category contains 20 reviews for each of the 20 most popular hotels in Chicago. The large and balanced scale of this dataset makes it a good representation of the population, making it ideal for use as the baseline dataset.
+The Deceptive Opinion Spam Corpus Dataset (hereafter referred to as the Baseline or Hotel Review Dataset) is used as the baseline dataset. This dataset is well-balanced and consisting of a total of 1600 rows data which evenly distributed across four categories (see Table 1). Each category contains 20 reviews for each of the 20 most popular hotels in Chicago. The large and balanced scale of this dataset makes it a good representation of the population, making it ideal for use as the baseline dataset.
 
 \begin{table}[h!]
   \centering
@@ -203,7 +203,7 @@ The AFRD\_Arabic-Fake-Reviews-Detection Dataset (hereafter referred to as the Ar
   \end{tabular}
 \end{table}
 
-Finally, the Fake Reviews of Apps Dataset (hereafter referred to as the App Review Dataset) is used to compare the performance of LLMs with both the hotel review dataset and the Arabic dataset. While this dataset is unbalanced in terms of veracity and lacks information on polarity, it contains enough data rows to be  in this study (see Table 3).
+Finally, the Fake Reviews of Apps Dataset (hereafter referred to as the App Review Dataset) is used to compare the performance of LLMs with both the hotel review dataset and the Arabic dataset. While this dataset is unbalanced in terms of veracity and lacks labels on polarity, it contains enough data rows to be used in this study (see Table 3).
 
 \begin{table}[h!]
   \centering
@@ -252,7 +252,7 @@ Similarly, the App Review Dataset will be divided into two strata: truthful revi
 
 Zero-shot and few-shot testing will be performed on the Hotel Review Dataset as the baseline. The LLM will receive either 0, 5, or 10 in-context examples from each stratum.
 
-Next, a polarity test will be conducted to evaluate whether sentiment polarity influences the LLM's ability to detect veracity. The in-context examples will remain unchanged, while the test set will consist exclusively of either positive or negative reviews.
+Next, a polarity test will be conducted to evaluate whether sentiment polarity influences the LLM's ability to detect veracity. The in-context examples will remain unchanged, while the test set will consist only either positive or negative reviews.
 
 For multilingual testing, either the training set or test set will be replaced with data from the Arabic Dataset to examine the LLM's ability to transfer knowledge from one language to another.
 
@@ -260,7 +260,7 @@ Finally, the above process will be repeated on the App Review Dataset to compare
 
 \subsection{API Paraneters \& Prompt Engineering}
 
-The LLM used in this study is the gpt-4o-2024-08-06 model from OpenAI with a default temperature of 0.7. A lower temperature is not utilized because it causes the LLM's responses to remain consistent across different runs, which loses the purpose of calculating average results from multiple experiments. Additionally, using a low temperature (e.g., 0.1) inexplicably results in an accuracy of 50\% regardless of the number of in-context examples provided. Therefore, the default temperature seems to be a suitable choice for this study.
+The LLM used in this study is the gpt-4o-2024-08-06 model from OpenAI with a default temperature of 0.7. A lower temperature is not utilized because it causes the LLM's responses to remain consistent across different runs, which loses the point of calculating average results from multiple experiments. In addition, using a low temperature (e.g., 0.1) somehow results in an accuracy of 50\% regardless of the number of in-context examples provided. Therefore, the default temperature seems to be a decent choice for this study.
 
 The initial response format (see Listing 1) is a list of strings, where each string is either "deceptive" or "truthful." This response format may vary depending on the specific prompt used, which will be discussed later.
 
@@ -269,7 +269,7 @@ class Result(BaseModel):
     results: list[str]
 \end{lstlisting}
 
-Two types of messages are sent to the LLMs: system messages and user messages (see Listing 2). The same prompt is used throughout the entire study to ensure fairness in comparison. The prompt is fed to the LLMs via API calls, and the results returned are compared against the ground truth.
+Two types of messages are sent to the LLMs: system messages and user messages (see Listing 2). The same prompt is used throughout the entire study to ensure fairness in comparison. The prompt is fed to the LLMs with API calls, and the results returned are compared against the ground truth.
 
 \begin{lstlisting}[language=json, caption={Initial Prompt Messages}]
 {
@@ -292,7 +292,7 @@ Two types of messages are sent to the LLMs: system messages and user messages (s
 }
 \end{lstlisting}
 
-However, the initial prompt was insufficient to receive the expected response format from ChatGPT-4o. The first problem encountered was that the API returned a list containing only one string (i.e. ['truthful'] or ['deceptive']). By emphasizing in the prompt that the LLM should classify each review individually (see Listing 3), the API was able to correctly return a list of strings instead of a single string.
+However, the initial prompt was insufficient to receive the expected response format from ChatGPT-4o. The first problem encountered was that the API returned a list containing only one string (i.e. ['truthful'] or ['deceptive']). By emphasizing that the LLM should classify each review individually (see Listing 3), the API was able to correctly return a list of strings instead of a single string.
 
 \begin{lstlisting}[language=json, caption={Updated User Messages 1}]
 {
@@ -304,7 +304,7 @@ However, the initial prompt was insufficient to receive the expected response fo
 }
 \end{lstlisting}
 
-After updating the prompt, a second issue arose: AI hallucination. The LLM randomly returned more outputs than the number of test items provided. By adding a constraint specifying that the results should not exceed the number of test items (see Lisiting 4), this issue was resolved.
+After updating the prompt, a second issue arose, that is, AI hallucination. The LLM randomly returned more outputs than the number of test items provided. By adding a constraint specifying that the results should not exceed the number of test items (see Lisiting 4), this issue was resolved.
 
 \begin{lstlisting}[language=json, caption={Updated User Messages 2}]
 {
@@ -317,7 +317,7 @@ After updating the prompt, a second issue arose: AI hallucination. The LLM rando
 }
 \end{lstlisting}
 
-Then the opposite problem occurred: the response from the LLM was truncated, resulting in fewer classifications than the number of input test items. To solve this issue, the index of each row in the test data was added to the prompt followed by the corresponding test review. The response formate was also modifed to require the LLM to return both the index of the original test review and its prediction (See Listing 5 \& 6). This ensured that the LLM returned the exact number of predictions matching the number of test items.
+Then the opposite problem occurred: the response from the LLM was truncated. This results in fewer classifications than the number of input test items. To solve this issue, the index of each row in the test data was added to the prompt followed by the corresponding test review. The response formate was also modifed to require the LLM to return both the index of the original test review and its prediction (See Listing 5 \& 6). This ensured that the LLM returned the exact number of predictions matching the number of test items.
 
 \begin{lstlisting}[language=json, caption={Updated User Messages 3}]
 {
@@ -361,7 +361,7 @@ Finally, the prompt is futher refined to include updated in-context example form
 
 This approach offers small companies a cost-effective solution for integrating deceptive review detection into their systems. Businesses that lack the resources to train their own machine-learning models could use this method to identify and remove fake reviews effectively.
 
-Also, since LLMs are publicly accessible third-party tools, individuals can use them to verify the credibility of reviews when they doubt the authenticity of reviews. Such accessibility could prevent individuals or organizations from manipulating product reviews for personal gain, which leads to a more transparent marketplace.
+Also, since LLMs are publicly accessible as third-party tools, individuals can use them to verify the credibility of reviews when they doubt the truthfulness of reviews. Such accessibility could prevent individuals or organizations from manipulating product reviews for personal gain, which leads to a more transparent marketplace.
 
 By reducing the prevalence of deceptive reviews, this approach helps protect consumer rights and minimizes the risk of fraud in online transactions.
 
@@ -371,7 +371,7 @@ In this section, the results of the experiments in the order introduced in Secti
 Note that, Sections 5.1 to 5.3 utilize the Baseline Dataset, while Sections 5.4 and 5.5 focus on the App Review Dataset to enable comparisons with the Baseline Dataset. Secion 5.3 can only perform on the Baseline Dataset as the App Review dataset does not include polarity information.
 
 \subsection{Baseline}
-In the graph of baseline results (see Figure 1), GPT-4o shows an improvement in accuracy to some extent as more in-context examples are provided. Similarly, the increasing precision with the number of in-context examples highlights GPT-4o's ability to minimize false positives as it learns from more examples. However, recall remains consistent across different numbers of in-context examples, suggesting that the model may become optimized for one class after training on examples but at the expense of performance in the other class.
+In the graph of baseline results (see Figure 1), GPT-4o shows an improvement in accuracy to some extent as more in-context examples are provided. Similarly, the increasing precision with the number of in-context examples highlights GPT-4o's ability to minimize false positives as it learns from more examples. However, recall remains consistent across different numbers of in-context examples. This suggests that the model may become optimized for one class after training on examples but at the expense of performance in the other class.
 
 \begin{figure}[h]
   \centering
@@ -401,7 +401,7 @@ For the remainder of this section, when all test reviews are positive, it will b
 }
 \end{lstlisting}
 
-The results indicate that both detection accuracy and recall for positive reviews eventually improve, while precision remains unchanged at the end (see Figure 2). Although the reason for the initial 10\% improvement in precision followed by a return to the original level remains unclear, all three metrics show improvements of 6.8\%, 9.6\%, and 4\%, respectively, compared to the baseline results at 40 shots.
+The results indicate that both detection accuracy and recall for positive reviews eventually improve, while precision remains unchanged at the end (see Figure 2). Although the reason for the initial 10\% improvement in precision followed by a drop to the original level remains unclear, all three metrics show improvements of 6.8\%, 9.6\%, and 4\%, respectively, compared to the baseline results at 40 shots.
 
 \begin{figure}[h]
   \centering
@@ -409,7 +409,7 @@ The results indicate that both detection accuracy and recall for positive review
   \caption{Positive Polarity Results}
 \end{figure}
 
-For the negative polarity test (see Figure 3), although all three metrics show noticeable improvement at 40 shots compared to 0 shots, the results highlight some anomalies. Accuracy increases by only around 3\%, and recall decreases by 15\% compared to the baseline results at 40 shots. On the other hand, precision shows an opposite trend to the positive polarity test, it drops by 10\% before dramatically increasing by 60\% at 40 shots.
+For the negative polarity test (see Figure 3), although all three metrics show some improvement at 40 shots compared to 0 shots, the results highlight some anomalies. Accuracy increases by only around 3\%, and recall decreases by 15\% compared to the baseline results at 40 shots. On the other hand, precision shows an opposite trend to the positive polarity test, it drops by 10\% before dramatically increasing by 60\% at 40 shots.
 
 \begin{figure}[h]
   \centering
@@ -417,14 +417,14 @@ For the negative polarity test (see Figure 3), although all three metrics show n
   \caption{Negative Polarity Results}
 \end{figure}
 
-While the recall for the negative polarity test is much higher than for the positive polarity test at 40 shots, in all other cases, the metrics for the negative polarity test are significantly lower than those for the positive polarity test. Therefore, it sis afe to say that, on average, the positive polarity test outperforms the negative polarity test, regardless of the number of in-context examples provided.
+While the recall for the negative polarity test is much higher than for the positive polarity test at 40 shots, in all other cases, the metrics for the negative polarity test are significantly lower than those for the positive polarity test. Therefore, it iss afe to say that, on average, the positive polarity test outperforms the negative polarity test, regardless of the number of in-context examples provided.
 
 A possible explanation for the LLM's better performance on positive fake reviews is that such reviews often have exaggerated sentiment patterns that are easier to detect. In contrast, negative fake reviews tend to use subtler language, which is harder to detect.
 
 \subsection{Multilingual Test with Arabic Dataset}
 In this section, the Arabic Dataset is used either as the test set (referred to as the English-to-Arabic test) or the training set (referred to as the Arabic-to-English test) to evaluate the LLM's ability to transfer and apply knowledge from one language to another.
 
-Tables are provided to complement the graphs, as the stacked numbers in the graphs can be difficult to read. The tables show the accuracy, precision, and recall of the LLMs across different numbers of in-context examples.
+Tables are provided as the stacked numbers in the graphs can be difficult to read. The tables show the accuracy, precision, and recall of the LLMs across different numbers of in-context examples.
 
 \begin{figure}[h]
   \centering
@@ -464,7 +464,7 @@ However, for Arabic to English test (see Figure 5 \& Table 4), there is nearly n
   \end{tabular}
 \end{table}
 
-One possible explanation for such an observation is that LLMs are predominantly trained on high-quality English data while other languages being less represented in the training data. Therefore, the model may have difficulty understanding Arabic in-context examples. This diminishes its ability to transfer and apply knowledge from Arabic to English contexts effectively.
+One possible explanation for such an observation is that LLMs are predominantly trained on high-quality English data while other languages being less represented in the training data. Therefore, the model may have difficulty understanding Arabic in-context examples. This lower its ability to transfer and apply knowledge from Arabic to English contexts effectively.
 
 \subsection{Few Shot Testing with App Review Dataset}
 
@@ -548,7 +548,7 @@ Below are examples from the App Review Dataset. It is clear that the deceptive r
   \end{enumerate}
 \end{example}
 
-However, the Hotel Review Dataset (i.e., Baseline Dataset) does not exhibit such clear patterns (see examples below). The deceptive reviews are not necessarily shorter than the truthful reviews, and the language patterns are less distinct compared to the App Review Dataset. Both deceptive reviews and truthful reviews contain extensive details such that it is difficult for those unfamiliar with the location to identify if the details are real. Therefore, LLMs face greater difficulty in detecting deceptive reviews within the Hotel Review Dataset compared to the App Review Dataset.
+However, the Hotel Review Dataset (i.e., Baseline Dataset) does not exhibit such clear patterns (see examples below). The deceptive reviews are not necessarily shorter than the truthful reviews, and the language patterns are less distinct compared to the App Review Dataset. Both deceptive reviews and truthful reviews contain a lot of details such that it is difficult for those unfamiliar with the location to identify if the details are real. Therefore, LLMs face greater difficulty in detecting deceptive reviews within the Hotel Review Dataset compared to the App Review Dataset.
 
 \begin{example}
   \textbf{Deceptive Example:}
@@ -573,7 +573,7 @@ When given English in-context hotel review examples, LLMs show significant impro
 However, with the App Review Dataset, the LLMs demonstrate the ability to learn knowledge from Arabic examples and apply it to English test cases. This suggests that the App Review Dataset may include easier patterns for the LLMs to learn from compared to the Hotel Review Dataset.
 
 \section{Limitations \& Future Directions}
-There are several limitations in this study. At the current stage, if more than 40 in-context examples and 40 test reviews are included in a prompt, it may exceed the token limitations of GPT-4o, results in multiple API calls. However, this study lacks funding, making it challenging to send multiple API calls. This limitation also explains why each experiment was repeated only five times due to budget constraints.
+There are several limitations in this study. At the current stage, if more than 40 in-context examples and 40 test reviews are included in a prompt, it may exceed the token limitations of GPT-4o, results in multiple API calls. However, this study lacks funding, making it challenging to send multiple API calls. This limitation is also the reason why each experiment was repeated only five times due to budget constraints.
 
 In the future, the robustness and reliability of the results can be improved as more runs are performed. Additionally, the study could be extended to include other LLMs to determine whether the findings are consistent across different models.
 
